@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="http://d3js.org/d3.v2.min.js"></script>
+    <script type="text/javascript" src="d3-masonry.js"></script>
+    <style type="text/css">
+
+      body {
+        font-family: "Hoefler Text", "Times New Roman", serif;
+        padding: 20px;
+      }
+
+      h1 {
+        font-weight: normal;
+        font-style: italic;
+      }
+
+      #container {
+        width: 80%;
+        margin: 0 auto;
+      }
+
+      #wall {
+        position: relative;
+        background: rgba(255,0,0,.1);
+      }
+
+      #wall .brick {
+        position: absolute;
+        box-sizing: border-box;
+        border: 1px solid #444;
+        background: rgba(0,0,0,.1);
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Masonry for d3</h1>
+      <p>Based on <a href="http://isotope.metafizzy.co">Isotope</a> by David DeSandro.</p>
+      <div id="wall">
+      </div>
+    </div>
+
+    <script>
+      var wall = d3.select("#wall"),
+          sizes = [
+            [200, 200],
+            [200, 600],
+            [200, 200],
+            [200, 200],
+            [600, 200],
+            [400, 400],
+            [200, 600],
+            [200, 200],
+            [200, 600],
+            [200, 200],
+            [200, 200]
+          ],
+          bricks = wall.selectAll(".brick")
+            .data(sizes)
+            .enter()
+            .append("div")
+              .attr("class", "brick");
+
+      var masonry = d3.masonry()
+        .width(function(d) { return d[0]; })
+        .height(function(d) { return d[1]; })
+        .columnWidth(100);
+
+      window.onresize = function() {
+        masonry
+          .outerWidth(wall.property("offsetWidth"))
+          .reset();
+
+        bricks.datum(masonry)
+          .style("width", function(d) { return d.width + "px"; })
+          .style("height", function(d) { return d.height + "px"; })
+          .style("left", function(d) { return d.x + "px"; })
+          .style("top", function(d) { return d.y + "px"; })
+          .datum(function(d) {
+            return d.data;
+          });
+
+        wall.style("height", masonry.outerHeight() + "px");
+      };
+
+      window.onresize();
+
+    </script>
+  </body>
+</html>
+
