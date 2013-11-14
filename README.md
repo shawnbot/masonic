@@ -41,6 +41,8 @@ masonic.reset();
 1. [masonic.outerWidth](#outerWidth) and [masonic.columnCount](#columnCount), with column width calculated automatically.
 2. [masonic.columnWidth](#columnWidth) and [masonic.columnCount](#columnCount), setting **outerWidth** as bricks are laid.
 
+### Methods
+
 <a name="width" href="#width">#</a> masonic.**width**([*accessor*])
 
 Get or set the function that determines a brick's `width`. This defaults to a
