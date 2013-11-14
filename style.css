@@ -1,0 +1,24 @@
+
+body {
+  font-family: "Hoefler Text", "Times New Roman", serif;
+  padding: 20px;
+}
+
+h1 {
+  font-weight: normal;
+  font-style: italic;
+}
+
+#container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+#wall {
+  position: relative;
+  background: #eee;
+}
+
+#wall .brick {
+  position: absolute;
+}
