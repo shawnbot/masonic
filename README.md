@@ -3,6 +3,8 @@ Masonic is a bare-bones [masonry](http://masonry.desandro.com/) layout for
 d3.js, inspired by [David DeSandro's](http://desandro.com/)
 [Isotope](http://isotope.metafizzy.co/) jQuery plugin.
 
+Check out [the demo](http://shawnbot.github.io/masonic/).
+
 ## Usage
 Just include `d3-masonic.js` along with [d3.js](http://d3js.org/) in your HTML,
 then check out the API:
