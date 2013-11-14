@@ -2,7 +2,7 @@
 
   var zero = d3.functor(0);
 
-  d3.masonry = function() {
+  d3.masonic = function() {
     var columnCount = 0,
         columnWidth = 200,
         outerWidth = 0,
@@ -12,7 +12,7 @@
         getWidth = function() { return this.offsetWidth; },
         getHeight = function() { return this.offsetHeight; };
 
-    function masonry(d, i) {
+    function masonic(d, i) {
       if (columns.length === 0) {
         columns = d3.range(columnCount).map(zero);
       }
@@ -71,75 +71,61 @@
     }
 
     // get/set the item width value (function)
-    masonry.width = function(_) {
-      if (arguments.length) {
-        getWidth = d3.functor(_);
-        return masonry;
-      } else {
-        return getWidth;
-      }
+    masonic.width = function(_) {
+      if (!arguments.length) return getWidth;
+      getWidth = d3.functor(_);
+      return masonic;
     };
 
     // get/set the item height value (function)
-    masonry.height = function(_) {
-      if (arguments.length) {
-        getHeight = d3.functor(_);
-        return masonry;
-      } else {
-        return getHeight;
-      }
+    masonic.height = function(_) {
+      if (!arguments.length) return getHeight;
+      getHeight = d3.functor(_);
+      return masonic;
     };
 
     // get/set column width
-    masonry.columnWidth = function(_) {
-      if (arguments.length) {
-        columnWidth = _;
-        if (outerWidth === 0) {
-          outerWidth = columnCount * columnWidth;
-        }
-        return masonry;
-      } else {
-        return columnWidth;
+    masonic.columnWidth = function(_) {
+      if (!arguments.length) return columnWidth;
+      columnWidth = _;
+      if (outerWidth === 0) {
+        outerWidth = columnCount * columnWidth;
       }
+      return masonic;
     };
 
     // get/set column count
-    masonry.columnCount = function(_) {
-      if (arguments.length) {
-        columnCount = _;
-        return masonry;
-      } else {
-        return columnCount;
-      }
+    masonic.columnCount = function(_) {
+      if (!arguments.length) return columnCount;
+      columnCount = _;
+      return masonic;
     };
 
     // get/set outer width
     // Note: the setter also sets columnWidth if columnCount > 0
-    masonry.outerWidth = function(_) {
-      if (arguments.length) {
-        outerWidth = _;
-        if (columnWidth > 0) {
-          columnCount = Math.floor(outerWidth / columnWidth);
-        }
-        return masonry;
-      } else {
-        return columnCount;
+    masonic.outerWidth = function(_) {
+      if (!arguments.length) return outerWidth;
+      outerWidth = _;
+      if (columnWidth > 0) {
+        columnCount = Math.floor(outerWidth / columnWidth);
       }
+      return masonic;
     };
 
     // getter only
-    masonry.outerHeight = function() {
+    masonic.outerHeight = function() {
+      if (arguments.length) throw "outerHeight() is a getter only";
       return outerHeight;
     };
 
-    masonry.reset = function() {
+    masonic.reset = function() {
       bricks = [];
       columns = [];
       outerHeight = 0;
-      return masonry;
+      return masonic;
     };
 
-    return masonry.reset();
+    return masonic.reset();
   };
 
 })(this);

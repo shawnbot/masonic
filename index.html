@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <title>masonic</title>
     <meta charset="utf-8">
-    <script type="text/javascript" src="http://d3js.org/d3.v2.min.js"></script>
-    <script type="text/javascript" src="d3-masonry.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="d3-masonic.js"></script>
     <style type="text/css">
 
       body {
@@ -24,14 +24,11 @@
 
       #wall {
         position: relative;
-        background: rgba(255,0,0,.1);
+        background: #eee;
       }
 
       #wall .brick {
         position: absolute;
-        box-sizing: border-box;
-        border: 1px solid #444;
-        background: rgba(0,0,0,.1);
       }
 
     </style>
@@ -39,43 +36,49 @@
   <body>
     <div id="container">
       <h1>Masonry for d3</h1>
-      <p>Based on <a href="http://isotope.metafizzy.co">Isotope</a> by David DeSandro.</p>
+      <p>
+        Based on <a href="http://isotope.metafizzy.co">Isotope</a> by David DeSandro.
+        Adapted for <a href="http://d3js.org">d3</a> by <a href="http://github.com/shawnbot">Shawn Allen</a>.
+        <a href="http://github.com/shawnbot/d3-masonic">Fork it!</a>
+      </p>
       <div id="wall">
       </div>
     </div>
 
     <script>
       var wall = d3.select("#wall"),
-          sizes = [
-            [200, 200],
-            [200, 600],
-            [200, 200],
-            [200, 200],
-            [600, 200],
-            [400, 400],
-            [200, 600],
-            [200, 200],
-            [200, 600],
-            [200, 200],
-            [200, 200]
-          ],
+          q = 100,
+          randomSize = function(min, max) {
+            return Math.round(min + Math.random() * (max - min)) * q;
+          },
+          sizes = d3.range(20)
+            .map(function() {
+              return [randomSize(1, 2), randomSize(1, 4)];
+            }),
+          color = d3.scale.linear()
+            .range(["hsl(0,100%,80%)", "hsl(180,100%,80%)"]),
           bricks = wall.selectAll(".brick")
             .data(sizes)
             .enter()
             .append("div")
-              .attr("class", "brick");
+              .attr("class", "brick")
+              .style("background", function() {
+                return color(Math.random());
+              });
 
-      var masonry = d3.masonry()
+      var masonic = d3.masonic()
         .width(function(d) { return d[0]; })
         .height(function(d) { return d[1]; })
         .columnWidth(100);
 
-      window.onresize = function() {
-        masonry
-          .outerWidth(wall.property("offsetWidth"))
+      function resize() {
+        var outerWidth = wall.property("offsetWidth");
+        masonic
+          .outerWidth(outerWidth)
           .reset();
 
-        bricks.datum(masonry)
+        bricks
+          .datum(masonic)
           .style("width", function(d) { return d.width + "px"; })
           .style("height", function(d) { return d.height + "px"; })
           .style("left", function(d) { return d.x + "px"; })
@@ -84,10 +87,11 @@
             return d.data;
           });
 
-        wall.style("height", masonry.outerHeight() + "px");
-      };
+        wall.style("height", masonic.outerHeight() + "px");
+      }
 
-      window.onresize();
+      resize();
+      window.addEventListener("resize", resize);
 
     </script>
   </body>
