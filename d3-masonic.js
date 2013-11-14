@@ -68,6 +68,8 @@
       }
 
       outerHeight = Math.max.apply(Math, columns);
+      // XXX set outerWidth?
+      outerWidth = Math.max(outerWidth, brick.x + brick.width);
     }
 
     // get/set the item width value (function)
