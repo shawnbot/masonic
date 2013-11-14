@@ -1,6 +1,6 @@
 (function(exports) {
 
-  var zero = d3.functor(0);
+  var VERSION = "0.1.0";
 
   d3.masonic = function() {
     var columnCount = 0,
@@ -10,7 +10,8 @@
         columns = [],
         bricks = [],
         getWidth = function() { return this.offsetWidth; },
-        getHeight = function() { return this.offsetHeight; };
+        getHeight = function() { return this.offsetHeight; },
+        zero = d3.functor(0);
 
     function masonic(d, i) {
       if (columns.length === 0) {
@@ -33,8 +34,7 @@
       } else {
         var groupCount = columnCount + 1 - span,
             groupY = [],
-            groupColY,
-            i;
+            groupColY;
         for (var i = 0; i < groupCount; i++) {
           groupColY = columns.slice(i, i + span);
           groupY[i] = Math.max.apply(Math, groupColY);
@@ -127,5 +127,7 @@
 
     return masonic.reset();
   };
+
+  d3.masonic.version = VERSION;
 
 })(this);
