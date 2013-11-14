@@ -4,9 +4,22 @@ body {
   padding: 20px;
 }
 
+a {
+  color: #666;
+}
+
 h1 {
   font-weight: normal;
   font-style: italic;
+}
+
+h1 b {
+  font-style: normal;
+  font-weight: normal;
+}
+
+h1 a {
+  text-decoration: none;
 }
 
 #container {
