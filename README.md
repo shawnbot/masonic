@@ -38,10 +38,11 @@ d3.selectAll(".brick")
 masonic.reset();
 ```
 
-**Here's the gotcha:** You have to call some combination of the following methods so that the layout knows when to stop stacking bricks horizontally:
+**Here's the catch:** You have to call some combination of the following methods so that the layout knows when to stop stacking bricks horizontally:
 
-1. [masonic.outerWidth](#outerWidth) and [masonic.columnCount](#columnCount), with column width calculated automatically.
-2. [masonic.columnWidth](#columnWidth) and [masonic.columnCount](#columnCount), setting **outerWidth** as bricks are laid.
+1. [masonic.outerWidth](#outerWidth) and [masonic.columnCount](#columnCount), calculating **column width** from these.
+1. [masonic.outerWidth](#outerWidth) and [masonic.columnWidth](#columnWidth), calculating **column count** from these.
+1. [masonic.columnWidth](#columnWidth) and [masonic.columnCount](#columnCount), setting **outer width** as bricks are laid.
 
 ### Methods
 
