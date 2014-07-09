@@ -1,5 +1,13 @@
-(function(exports) {
-
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['d3'], factory);
+  } else {
+    // Browser globals
+    factory(d3);
+  }
+}(function(d3) {
+  'use strict';
   var VERSION = "0.1.0";
 
   d3.masonic = function() {
@@ -131,5 +139,4 @@
   };
 
   d3.masonic.version = VERSION;
-
-})(this);
+}));
